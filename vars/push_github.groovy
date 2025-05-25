@@ -1,8 +1,11 @@
-def call(String username, String imagename, String tagname){
-        echo 'Pushing the image to Docker Hub'
-        withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-        sh 'docker login -u $dockerHubUser -p $dockerHubPassword'
-        sh 'docker tag nodeapp:latest mokchhedul/nodeapp:latest'
-        sh 'docker push "${username}"/"${imagename}":"${tagname}"'
-        }
+def call(String username, String imagename, String tagname) {
+    echo "🔄 Pushing Docker image: ${username}/${imagename}:${tagname}"
+
+    withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+        sh """
+            echo "\$dockerHubPassword" | docker login -u \$dockerHubUser --password-stdin
+            docker tag nodeapp:latest \$dockerHubUser/${imagename}:${tagname}
+            docker push \$dockerHubUser/${imagename}:${tagname}
+        """
+    }
 }
