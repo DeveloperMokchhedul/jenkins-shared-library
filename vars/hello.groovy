@@ -1,4 +1,4 @@
 def call(){
-echo "hello jenkin"
+echo "hello jenkin with update jenkin mokchhedul"
   
 }
