@@ -1,5 +1,5 @@
-def call(String url, String branch) {
-    echo "Hey, this is cloning git code..."
-    git url: "${url}", branch: "${branch}"
-    echo "Completed cloning code."
+def call(String branch, String url) {
+        echo 'This is git cloning stage'
+        git branch: "${branch}", url: "${url}"
+        echo 'GitHub code cloned successfully'
 }
