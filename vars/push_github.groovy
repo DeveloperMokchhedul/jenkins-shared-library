@@ -1,4 +1,4 @@
-def call(String username, String imagename, String tagname) {
+def call(String imagename, String tagname) {
     echo "🔄 Pushing Docker image: ${username}/${imagename}:${tagname}"
 
     withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
